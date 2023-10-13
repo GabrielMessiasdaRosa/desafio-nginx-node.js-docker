@@ -1,0 +1,17 @@
+{
+  "name": "desafio-nginx-node.js-docker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "uuid": "^9.0.1"
+  }
+}

@@ -1,0 +1,43 @@
+version: "3.7"
+name: desafio-docker-2
+services:
+  mysqldb:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0 && sudo chown -R mysql:mysql /var/lib/mysql
+    restart: always
+    tty: true
+    env_file:
+      - .db.env
+    container_name: mysqldb
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - desafio-docker-2-network
+
+  nodeapp:
+    container_name: nodeapp
+    build: .
+    networks:
+      - desafio-docker-2-network
+    env_file:
+      - .node.env
+    depends_on:
+      - mysqldb
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/usr/share/nginx/html
+    depends_on:
+      - nodeapp
+    networks:
+      - desafio-docker-2-network
+
+networks:
+  desafio-docker-2-network:
+    name: desafio-docker-2-network
+    driver: bridge
