@@ -39,5 +39,4 @@ services:
 
 networks:
   desafio-docker-2-network:
-    name: desafio-docker-2-network
     driver: bridge
