@@ -1,8 +1,7 @@
 FROM node:latest as builded-project
 
 WORKDIR /usr/src/app
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY ./package*.json .
 
 RUN npm install
 
@@ -16,8 +15,7 @@ RUN apt update && \
 WORKDIR /usr/src/app
 
 COPY ./src ./src
-COPY --from=builded-project /usr/src/app/package.json .
-COPY --from=builded-project /usr/src/app/package-lock.json .
+COPY --from=builded-project /usr/src/app/package*.json .
 COPY --from=builded-project /usr/src/app/node_modules ./node_modules
 
 ENTRYPOINT wait-for mysqldb:3306 -t 40 -- npm run start
