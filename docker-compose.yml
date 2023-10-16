@@ -23,6 +23,10 @@ services:
       - .node.env
     depends_on:
       - mysqldb
+    volumes:
+      - ./package-lock.json:/usr/src/app/package-lock.json
+      - ./package.json:/usr/src/app/package.json
+      - ./src:/usr/src/app/src
 
   nginx:
     image: nginx:alpine
