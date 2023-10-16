@@ -1,10 +1,3 @@
-FROM node:latest as builded-project
-
-WORKDIR /usr/src/app
-COPY ./package*.json .
-
-RUN npm install
-
 FROM node:slim
 
 RUN apt update && \
@@ -15,7 +8,6 @@ RUN apt update && \
 WORKDIR /usr/src/app
 
 COPY ./src ./src
-COPY --from=builded-project /usr/src/app/package*.json .
-COPY --from=builded-project /usr/src/app/node_modules ./node_modules
+COPY ./package*.json .
 
-ENTRYPOINT wait-for mysqldb:3306 -t 40 -- npm run start
+ENTRYPOINT wait-for mysqldb:3306 -t 40 -- npm install && npm run start
