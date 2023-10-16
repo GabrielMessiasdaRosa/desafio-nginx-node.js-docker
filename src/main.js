@@ -23,8 +23,8 @@ const server = http.createServer(async (req, res) => {
       res.setHeader("Content-Type", "application/json");
       return res.end(
         JSON.stringify({
-          html: `<h1>Full Cycle Rocks!</h1>`,
-          data: { ...people },
+          html: `<h1>Full Cycle Rocks!!!</h1>`,
+          people,
           status: 200,
         })
       );
