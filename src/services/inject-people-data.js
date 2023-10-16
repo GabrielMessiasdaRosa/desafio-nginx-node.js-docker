@@ -1,25 +1,23 @@
 import { v4 as uuid } from "uuid";
 import { db } from "../main.js";
 
-export async function injectCharactersData() {
+export async function injectPeopleData() {
   const sql =
-    "insert into characters(id, name) values" +
-    CHARACTERS_DATA.map(
-      (character) => `('${uuid()}', '${character.name}')`
-    ).join(",") +
+    "insert into people(id, name) values" +
+    PEOPLE_DATA.map((people) => `('${uuid()}', '${people.name}')`).join(",") +
     ";";
   db.query(sql, (error) => {
     if (error) {
       return console.log(
-        "🔴 Table 'characters' already populated with default data."
+        "🔴 Table 'people' already populated with default data."
       );
     }
-    return console.log("🟢 Characters injected successfuly!");
+    return console.log("🟢 Peoples data injected successfuly!");
   });
   return;
 }
 
-const CHARACTERS_DATA = [
+const PEOPLE_DATA = [
   {
     name: "John Snow",
   },

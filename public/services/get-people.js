@@ -1,6 +1,6 @@
-const apiUrl = "http://localhost:8080/api/characters";
+const apiUrl = "http://localhost:8080/api/people";
 
-async function getCharacters() {
+async function getPeople() {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -9,4 +9,3 @@ async function getCharacters() {
     console.error(error);
   }
 }
-
